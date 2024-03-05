@@ -1,0 +1,411 @@
+本文介绍香蕉空间所使用的 bTeX 语法,
+适用于除了 ``模板''、``模块'' 命名空间中以外的页面.
+如果您熟悉 LaTeX, 您应该可以几乎不需要本文档, 就能开始进行编辑.
+
+如果阅读本文档后仍有问题, 您可以在[[讨论室:香蕉空间]]提问.
+
+== 文字样式 ==
+
+使用 \code{\textbf{文字}} \textbf{加粗}文字.
+
+使用 \code{\textit{文字}} \textit{倾斜}文字.
+在中文写作时, 不要使用倾斜, 因为效果并不美观.
+
+使用 \code{\textcolor{颜色代码}{文字}} 设置文字的颜色,
+其中颜色代码是十六进制 RGB 代码, 例如\textcolor{ff0000}{红色}: \code*{ff0000}.
+
+使用 \code{\textsize{大小}{文字}} 设置字体大小.
+默认大小是 18.
+如果要插入标题, 请看 \S\ref{sect-titles}.
+
+使用 \code{\code*{代码}} 插入行内代码, \code{\codeblock*{代码}}
+插入代码块. \code{\code, \codeblock} 则会有bTeX的语法高亮.
+
+== 换行和空格 ==
+
+使用两个回车来换行 (分段). 一个回车会被视作空格.
+
+\codeblock{
+    这是一个段落.
+
+    这是另一个段落.
+}
+
+连续的空格会被视作一个空格.
+使用 \code{\ } (反斜杠加空格) 来强行插入空格. 
+
+\codeblock{
+    这样只能打出      一个空格.
+    这样可以打出\ \ \ 三个空格.
+}
+
+在源代码中, 请在合适的地方 (如标点符号处) 换行.
+如果源代码的一行超出了编辑器的宽度,
+就说明这一行太长了, 需要将它断开.
+
+请在中文字符和西文字符之间、中文字符和公式之间插入空格.
+
+\codeblock{
+    设 $X$ 是 Calabi--丘流形.
+}
+
+== 标题 ==
+\label{sect-titles}
+
+可以使用 Wiki 语法插入标题:
+
+\codeblock{
+    == 节标题 ==
+    === 小节标题 ===
+    ==== 小小节标题 ====
+}
+
+也可以使用 TeX 语法插入标题:
+
+\codeblock{
+    \section{节标题}
+    \subsection{小节标题}
+    \subsubsection{小小节标题}
+}
+
+如果不想编号, 可以使用
+
+\codeblock{
+    ==* 节标题 ==  或 \section*{节标题}   % 不编号
+    ==** 节标题 == 或 \section**{节标题}  % 不编号且不显示在目录中
+
+}
+
+如果想取消所有编号, 或想给小节也编号,
+可以在页面开头 (或讲义的 preamble 部分) 插入下列选项之一:
+
+\codeblock{
+    \nosectionnumbers      % 取消节编号
+    \numbersubsections     % 给小节编号
+    \numbersubsubsections  % 给小节和小小节编号
+
+}
+
+这些选项也会影响定理的编号.
+为了所有百科条目的一致性,
+请勿在百科条目中使用这些选项.
+
+若要查看关于页面标题的帮助,
+例如如何在其中插入数学公式,
+请参见[[帮助:页面标题]].
+
+== 数学公式 ==
+
+与 LaTeX 中相同, 用 \code{$ ... $} 或 \code{\( ... \)} 插入行内公式,
+用 \code{$$ ... $$} 或 \code{\[ ... \]} 插入行间公式.
+
+在写作百科条目时, 为统一起见, 均使用 \code{$ ... $} 和 \code{\[ ... \]},
+且后者需要缩进, 以增加代码的可读性:
+
+\codeblock{
+    \[
+        \sum_{i = 1}^n i = \frac{n^2 + n}{2}
+    \]
+}
+
+== 标点符号 ==
+
+为了一致性, 香蕉空间的页面内容都使用西文标点.
+如果要插入中文标点, 可以使用 \code{\，}、\code{\。} 等等.
+如果要让整篇文章使用中文标点, 可以在开头加上下面的代码:
+
+\codeblock{
+    \fullwidthpunctuation
+}
+
+使用 \code{\{}、\code{\}}、\code{\$}、\code{\%}、\code{\#}、\code{\&}
+来输入字符 \{、\}、\$、\%、\#、\&.
+使用 \code{\backslash} 输入反斜杠 (\backslash).
+
+使用 \code{-} 来输入短横杠 (hyphen, -),
+用 \code{--} 输入中横杠 (en-dash, --),
+用 \code{---} 输入长横杠 (em-dash, ---).
+这三者用法不同, 应该区分开来.
+
+\codeblock{
+    短横杠: $R$-代数, Levi-Civita 联络
+    中横杠：Newton--Leibniz 公式, Lie 群--Lie 代数对应
+    长横杠：中文破折号------由两个长横杠组成.
+}
+
+== 文字对齐 ==
+
+使用 \code{center} 环境将文字居中,
+\code{flushleft} 环境居左,
+\code{flushright} 环境居右.
+
+\codeblock{
+    \begin{center}
+        这段文字是居中的.
+    \end{center}
+}
+
+如果不喜欢美式英语, 可以使用 \code{centre}.
+
+== 定理、定义、证明 ==
+
+与 LaTeX 中相同, 使用
+\code{theorem}、\code{definition}、\code{proof}
+等等环境插入定理、定义、证明.
+
+\codeblock{
+    \begin{theorem}
+        定理内容 ...
+    \end{theorem}
+}
+
+详见[[帮助:定理和证明]].
+
+== 图片 ==
+\label{sect-images}
+
+在[[特殊:上传文件|上传文件]]页面上传图片后, 使用以下几种方式插入图片:
+
+\codeblock{
+    {{image|图片.jpg|200px}}
+}
+
+这行代码将插入图片, 并设置宽度为 200 像素.
+
+\codeblock{
+    {{image|图片.jpg|200px|thumb|right|说明文字}}
+}
+
+这行代码将图片放在页面右边的一个框中, 并附以说明文字.
+
+另外, 插图也可以使用 TikZ 制作.
+见 \S\ref{sect-tikz}.
+
+== 链接 ==
+
+使用 \code{[[页面标题]]} 创建指向页面的链接.
+使用 \code{[[页面标题|文字]]} 创建链接并显示指定的文字.
+
+另外, \code{[[X||Y]]} 是 \code{[[XY|X]]} 的缩写.
+例如: \code{[[紧||空间]]流形} $\to$ [[紧||空间]]流形,
+\code{[[核||(代数)]]} $\to$ [[核||(代数)]].
+
+要插入网页链接, 使用下面两种格式.
+
+\codeblock{
+    \url{https://www.bananaspace.org}
+    \href{https://www.bananaspace.org}{香蕉空间}
+}
+
+要引用文章中的定理, 使用下面的格式.
+
+\codeblock{
+    \begin{theorem} \label{thm-xxx}
+        ...
+    \end{theorem}
+
+    ... 定理~\ref{thm-xxx} ...
+}
+
+这种引用只在同一页面中,
+或者在 ``讲义'' 命名空间中同一讲义的不同页面之间,
+才能使用.
+
+== 参考文献 ==
+
+在百科页面末尾, 使用以下 biblatex 格式插入参考文献:
+\codeblock{
+    == 参考文献 ==
+
+    * {{@book|BottTu1982,
+        author    = {[[Raoul Bott]] and [[Loring Tu]]},
+        year      = {1982},
+        title     = {Differential Forms in Algebraic Topology},
+        series    = {Graduate Texts in Mathematics},
+        number    = {82},
+        publisher = {Springer}
+    }}
+
+    * ...
+}
+
+这样, 在参考文献中会显示以下条目:
+
+* {{@book|BottTu1982,
+    author    = {[[Raoul Bott]] and [[Loring Tu]]},
+    year      = {1982},
+    title     = {Differential Forms in Algebraic Topology},
+    series    = {Graduate Texts in Mathematics},
+    number    = {82},
+    publisher = {Springer}
+}}
+
+在文中使用 \code{\cite{BottTu1982}} 引用: \cite{BottTu1982}.
+详见[[帮助:参考文献]].
+
+%%%%%%%%%% 以下是旧版参考文献格式 %%%%%%%%%%
+% 使用以下格式插入参考文献列表:
+
+% \codeblock{
+%     \begin{thebibliography}
+%         \bibitem[Abc00]{abc}
+%             作者 (年份). 标题. ...
+%     \end{thebibliography}
+% }
+
+% 其中 \code*{[Abc00]} 是参考文献编号. 若不提供, 则默认用数字编号.
+% 在百科条目中, 总使用作者姓氏的前三个字母, 加上作品出版年份后两位来编号.
+% 若有多个作者, 则将字母换成每个作者姓氏首字母 (例如 \code*{[BT82]}).
+% 若作品名称有常见的简称, 则使用该简称 (例如 \code*{[EGA I]}).
+
+% 要在文中引用参考文献, 使用以下格式:
+
+% \codeblock{
+%     \cite{abc} 或 \cite[第 2 章]{abc}
+% }
+
+% 若要去掉 ``参考文献'' 标题,
+% 可将 \code{thebibliography} 环境换成 \code{references}.
+
+== 列表 ==
+
+使用 \code{itemize} 环境插入不带编号的列表。
+用 \code{enumerate} 环境插入带编号的列表。
+
+\codeblock{
+    \begin{enumerate}[label=(\roman*)] % 用小写罗马数字编号
+        \item
+            这是第一个列表项目.
+        \item
+            这是第二个列表项目.
+    \end{enumerate}
+}
+
+也可使用下列语法插入列表:
+
+\codeblock{
+    * 第一项
+
+    * 第二项
+}
+
+在有些情况下, 例如在百科条目末尾列出相关条目的链接时,
+我们需要没有段间距的列表.
+只需在上述格式中不要空行就可以实现这一点.
+
+\codeblock{
+    * 第一项
+    * 第二项
+}
+
+但除了列出链接的时候以外,
+其它任何时候都使用有空行的格式.
+
+== 表格 ==
+
+使用 \code{tabular} 环境插入表格.
+
+\codeblock{
+    \begin{tabular}{ccc}  % 三列均居中对齐
+        ! 标题 1 & ! 标题 2 & ! 标题 3 \\
+        内容 1 & [C2] 内容 2
+    \end{tabular}
+}
+
+这里, 以 \code*{!} 开头的单元格是表格头, 会加粗并使用不同的背景色.
+选项 \code*{[C2]} 表示跨两列. 可以使用 \code*{[R2]} 表示跨两行,
+也可以使用 \code*{[l]}, \code*{[c]}, \code*{[r]}
+指定单元格的对齐方式 (左、中、右).
+
+== 交换图 ==
+\label{sect-tikz}
+
+香蕉空间提供 \code*{cd} 环境, 用于绘制交换图:
+
+\codeblock{
+    \[
+        \begin{cd}
+            A \ar[r] \ar[d] & B \ar[d] \\
+            C \ar[r] \ar[ur, dashed] & D
+        \end{cd}
+    \]
+}
+
+其语法与 \code*{tikzcd}
+(\href{https://ctan.math.washington.edu/tex-archive/graphics/pgf/contrib/tikz-cd/tikz-cd-doc.pdf}{帮助文档})
+相同, 但仅支持 \code*{tikzcd} 中的部分常用功能.
+如果 \code*{cd} 环境不能满足您的需求,
+您可以直接使用 \code*{tikzcd} 环境绘制交换图,
+或使用 \code*{tikzpicture} 环境绘制插图.
+
+我们推荐使用 \code*{cd} 而非 \code*{tikzcd},
+因为前者使用 HTML 进行渲染 (而后者生成图片),
+并且支持将交换图作为公式的一部分.
+另外, TikZ 插图在服务器上用 LaTeX 编译,
+因此会显著减慢编译速度.
+
+如果上述功能仍然不能满足您的需求,
+您可以将插图以图片的形式上传, 然后在页面中插入图片. 见~\S\ref{sect-images}.
+
+== 脚注 ==
+
+使用 \code{\footnote} 命令插入脚注:
+
+\codeblock{
+    ... 文字 \footnote{脚注文字} 文字 ...
+}
+
+脚注需要用 \code{\printfootnotes} 命令打印出来,
+例如在页面底端:
+
+\codeblock{
+    ==** 脚注 ==
+    \printfootnotes
+}
+
+不要在百科条目中使用脚注.
+
+== 语言 ==
+
+如果使用英文写作 (只对讲义适用),
+可以在页面开头或讲义的 preamble 页面输入
+
+\codeblock{
+    \english
+}
+
+这将会把所有定理、定义等的名称改成英文,
+并在 HTML 源代码中告诉浏览器这是英文文档,
+浏览器可据此进行断字等处理.
+
+如果在文档中插入一小段别的语言的文字, 请使用下面的格式:
+
+\codeblock{
+    拓扑斯 (英文: \lang{en}{topos}, 来自古希腊语: \lang{grc}{τόπος})
+}
+
+这里 \code*{en} 和 \code*{grc} 是 ISO 语言代码.
+在提到以外国人名命名的定理、数学概念时, 不必这样做.
+
+== 定义命令 ==
+
+您可以像在 LaTeX 中一样,
+使用 \code{\def}、\code{\newcommand}、\code{\renewcommand}
+定义命令, 使用
+\code{\newenvironment}、\code{\renewenvironment}
+定义环境.
+详见[[帮助:定义命令]].
+
+== 使用模板 ==
+
+使用 Wiki 语法使用模板:
+\code{{{模板名称|参数|参数|...}}}.
+详见[[帮助:使用模板]].
+
+== 添加分类 ==
+
+若要将页面添加到分类中, 可在页面末尾使用以下代码:
+
+\codeblock{
+    [[分类:名称]]
+}
