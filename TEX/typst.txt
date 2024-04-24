@@ -1,2 +1,2 @@
-i turn to typst, which is an online
-typesetting engine
+easy-learning beautiful online typesetting engine
+faster and much more elegant than LaTex
